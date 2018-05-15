@@ -10,35 +10,34 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.caelum.jdbc.ConnectionFactory;
+import br.com.caelum.jdbc.exception.DaoException;
 import br.com.caelum.jdbc.modelo.Contato;
 
 public class ContatoDao {
-	
+
 	private Connection connection;
-	
+
 	public ContatoDao() {
 		this.connection = new ConnectionFactory().getConnection();
 	}
-	
+
 	public void adiciona(Contato contato) {
-		String sql = "insert into contatos " +
-				"(nome, email, endereco, dataNascimento)"+
-				"values(?,?,?,?)";
-		
+		String sql = "insert into contatos " + "(nome, email, endereco, dataNascimento)" + "values(?,?,?,?)";
+
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, contato.getNome());
 			stmt.setString(2, contato.getEmail());
 			stmt.setString(3, contato.getEndereco());
 			stmt.setDate(4, new Date(contato.getDataNascimento().getTimeInMillis()));
-			
+
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public List<Contato> getLista() {
 		try {
 			ArrayList<Contato> contatos = new ArrayList<Contato>();
@@ -50,20 +49,62 @@ public class ContatoDao {
 				contato.setNome(rs.getString("nome"));
 				contato.setEmail(rs.getString("email"));
 				contato.setEndereco(rs.getString("endereco"));
-				
+
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("dataNascimento"));
 				contato.setDataNascimento(data);
-				
+
 				contatos.add(contato);
 			}
-			
+
 			rs.close();
 			stmt.close();
 			return contatos;
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new DaoException(e);
 		}
+	}
+
+	public List<Contato> getContatosWithNameStart(String string) throws SQLException {
+		ArrayList<Contato> contatos = new ArrayList<Contato>();
+		PreparedStatement stmt = this.connection.prepareStatement("select * from contatos where nome like ?");
+		stmt.setString(1, string + "%");
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+			Contato contato = new Contato();
+			contato.setId(rs.getLong("id"));
+			contato.setNome(rs.getString("nome"));
+			contato.setEmail(rs.getString("email"));
+			contato.setEndereco(rs.getString("endereco"));
+
+			Calendar data = Calendar.getInstance();
+			data.setTime(rs.getDate("dataNascimento"));
+			contato.setDataNascimento(data);
+
+			contatos.add(contato);
+		}
+
+		rs.close();
+		stmt.close();
+		return contatos;
+	}
+
+	public Contato pesquisar(int id) throws SQLException {
+		PreparedStatement stmt = this.connection.prepareStatement("select * from contatos where id = ?");
+		stmt.setInt(1, id);
+		ResultSet rs = stmt.executeQuery();
+
+		Contato contato = new Contato();
+		while(rs.next()) {
+			contato.setNome(rs.getString("nome"));
+			contato.setEmail(rs.getString("email"));
+			contato.setEndereco(rs.getString("endereco"));
+			
+			Calendar data = Calendar.getInstance();
+			data.setTime(rs.getDate("dataNascimento"));
+			contato.setDataNascimento(data);
+		}
+		return contato;
 	}
 
 }
