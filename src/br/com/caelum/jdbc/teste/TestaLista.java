@@ -5,7 +5,6 @@ import static java.util.Arrays.asList;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.List;
 
 import br.com.caelum.jdbc.dao.ContatoDao;
@@ -26,7 +25,6 @@ public class TestaLista {
 		
 		Contato contato = dao.pesquisar(1);
 		print(asList(contato));
-		
 		
 	}
 
