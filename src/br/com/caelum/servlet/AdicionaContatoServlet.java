@@ -21,6 +21,18 @@ public class AdicionaContatoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String PATTERN = "dd/MM/yyyy";
+	
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		System.out.println("Iniciando a servlet");
+	}
+	
+	@Override
+	public void destroy() {
+		super.destroy();
+		System.out.println("Destruindo a servlet");
+	}
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
