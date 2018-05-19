@@ -12,14 +12,31 @@
 	<!-- cria o DAO -->
 	<jsp:useBean id="dao" class="br.com.caelum.agenda.dao.ContatoDao" />
 	<table>
+		<tr>
+			<th>Nome</th>
+			<th>E-mail</th>
+			<th>Endereço</th>
+			<th>Data de Nascimento</th>
+		</tr>
 		<!-- percorre contatos montando as linhas da tabela -->
-		<c:forEach var="contato" items="${dao.lista}">
-			<tr>
+		<c:forEach var="contato" items="${dao.lista}" varStatus="id">
+
+			<c:choose>
+				<c:when test="${id.count % 2 == 0}">
+					<c:set var="cor" value="White"></c:set>
+				</c:when>
+				<c:otherwise>
+					<c:set var="cor" value="LightGray"></c:set>
+				</c:otherwise>
+			</c:choose>
+
+			<tr style="background-color: ${cor}">
 				<td>${contato.nome}</td>
 				<td>${contato.email}</td>
 				<td>${contato.endereco}</td>
 				<td>${contato.dataNascimento.time}</td>
 			</tr>
+
 		</c:forEach>
 	</table>
 </body>
