@@ -1,4 +1,4 @@
-package br.com.caelum.jdbc.exception;
+package br.com.caelum.agenda.exception;
 
 import java.sql.SQLException;
 

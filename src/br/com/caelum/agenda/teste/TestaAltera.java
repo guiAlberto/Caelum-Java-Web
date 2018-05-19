@@ -1,9 +1,9 @@
-package br.com.caelum.jdbc.teste;
+package br.com.caelum.agenda.teste;
 
 import java.util.Calendar;
 
-import br.com.caelum.jdbc.dao.ContatoDao;
-import br.com.caelum.jdbc.modelo.Contato;
+import br.com.caelum.agenda.dao.ContatoDao;
+import br.com.caelum.agenda.modelo.Contato;
 
 public class TestaAltera {
 
