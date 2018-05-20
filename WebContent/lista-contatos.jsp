@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<c:import url="cabecalio.jsp"></c:import>
+	<c:import url="cabecalho.jsp"></c:import>
 	<!-- cria o DAO -->
 	<jsp:useBean id="dao" class="br.com.caelum.agenda.dao.ContatoDao" />
 	<table>
