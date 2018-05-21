@@ -13,7 +13,7 @@ public class TestaPesquisaPorIndice {
 	public static void main(String[] args) throws SQLException {
 
 		ContatoDao dao = new ContatoDao();
-		Contato contato = dao.pesquisar(1);
+		Contato contato = dao.pesquisar(1L);
 		TestUtil.print(asList(contato));
 
 	}

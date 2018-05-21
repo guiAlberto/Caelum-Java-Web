@@ -91,9 +91,9 @@ public class ContatoDao {
 		return contatos;
 	}
 
-	public Contato pesquisar(int id) throws SQLException {
+	public Contato pesquisar(Long id) throws SQLException {
 		PreparedStatement stmt = this.connection.prepareStatement("select * from contatos where id = ?");
-		stmt.setInt(1, id);
+		stmt.setLong(1, id);
 		ResultSet rs = stmt.executeQuery();
 
 		Contato contato = new Contato();
