@@ -3,9 +3,7 @@ package br.com.caelum.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,12 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.agenda.dao.ContatoDao;
 import br.com.caelum.agenda.modelo.Contato;
+import br.com.caelum.agenda.util.DateUtil;
 
 @WebServlet("/adicionaContato")
 public class AdicionaContatoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final String PATTERN = "dd/MM/yyyy";
 	
 	@Override
 	public void init() throws ServletException {
@@ -48,9 +46,7 @@ public class AdicionaContatoServlet extends HttpServlet {
 		Calendar dataNascimento;
 
 		try {
-			Date date = new SimpleDateFormat(PATTERN).parse(dataEmTexto);
-			dataNascimento = Calendar.getInstance();
-			dataNascimento.setTime(date);
+			dataNascimento = DateUtil.calendarfy(dataEmTexto);
 		} catch (ParseException e) {
 			out.println("Erro na conversão da data");
 			return;

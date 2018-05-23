@@ -101,6 +101,7 @@ public class ContatoDao {
 			contato.setNome(rs.getString("nome"));
 			contato.setEmail(rs.getString("email"));
 			contato.setEndereco(rs.getString("endereco"));
+			contato.setId(Long.parseLong(rs.getString("id")));
 			
 			Calendar data = Calendar.getInstance();
 			data.setTime(rs.getDate("dataNascimento"));
