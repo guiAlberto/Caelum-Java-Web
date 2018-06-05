@@ -48,9 +48,10 @@
 				<td><a href="mvc?logica=MostraAlteraContatoLogic&id=${contato.id}">Alterar</a>
 				</td>
 			</tr>
-
 		</c:forEach>
 	</table>
+	<br />
+	<a href="mvc?logica=MostraAdicionaContatoLogic">Adicionar contato</a>
 	<c:import url="rodape.jsp"></c:import>
 </body>
 </html>

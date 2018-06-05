@@ -23,5 +23,6 @@
 	<%
 		System.out.println("Tudo foi executado!");
 	%>
+	<a href="mvc?logica=ListaContatosLogic">Ir para agenda</a>
 </body>
 </html>
