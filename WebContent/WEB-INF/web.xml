@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>fj21-agenda</display-name>
 	<welcome-file-list>
-		<welcome-file>bemvindo.jsp</welcome-file>
+		<welcome-file>/WEB-INF/jsp/bemvindo.jsp</welcome-file>
 	</welcome-file-list>
 
 	<servlet>
